@@ -41,4 +41,25 @@ RSpec.describe 'Merchants API', type: :request do
 			expect(response).to have_http_status(200)
 		end
 	end
+
+
+
+	describe 'GET /api/v1/merchants/1/items' do
+
+			let!(:merchant) { create(:merchant) }
+			let!(:items) {create_list(:item, 5, merchant_id: merchant.id)}
+			let(:merchant_id) {merchant.id}
+			let(:item_id) {items.first.id}
+			before { get "/api/v1/merchants/#{merchant_id}/items" }
+
+		it 'returns 1 merchants items' do
+			expect(json).not_to be_empty
+			expect(json["data"].first["id"].to_i).to eq(item_id)
+			expect(json["data"].first["attributes"]["merchant_id"].to_i).to eq(merchant.id)
+		end
+
+		it 'returns status code 200' do
+			expect(response).to have_http_status(200)
+		end
+	end
 end
