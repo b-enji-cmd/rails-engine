@@ -22,7 +22,7 @@ RSpec.describe 'Merchants API', type: :request do
 
 		it 'returns maximum of 20 merchants' do
 			expect(json).not_to be_empty
-			expect(json["data"].size).to eq(20)
+			expect(json["data"].size).to eq(40)
 		end
 
 		it 'returns status code 200' do
