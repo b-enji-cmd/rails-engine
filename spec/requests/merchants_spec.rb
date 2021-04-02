@@ -41,4 +41,17 @@ RSpec.describe 'Merchants API', type: :request do
 			expect(response).to have_http_status(200)
 		end
 	end
+
+	describe 'GET /api/v1/merchants/1/items' do
+		before {get "/api/v1/merchants/#{merchants.first.id}/items"}
+		it 'returns 1 merchant' do
+			binding.pry
+			# expect(json).not_to be_empty
+			# expect(json["data"]["id"].to_i).to eq(merchants.first.id)
+		end
+
+		it 'returns status code 200' do
+			expect(response).to have_http_status(200)
+		end
+	end
 end
