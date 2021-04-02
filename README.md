@@ -66,9 +66,9 @@ Areas of exploration and learning on this project included:
 1. Clone this repo
 2. Install gem packages: `bundle install`
 3. Seed. A pgdump can be found in `./db/data` 
-    ```
-    rails db:{drop,create,migrate,seed}
-    ```
+ ```
+ rails db:{drop,create,migrate,seed}
+ ```
 4. Run the RSpec test suite: 
 ```
 bundle exec rspec
