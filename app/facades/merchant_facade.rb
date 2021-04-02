@@ -7,4 +7,8 @@ class MerchantFacade
 	def self.find_merchant(id)
 		Merchant.find(id)
 	end
+
+	def self.find_merchant_items(id)
+		Merchant.find(id).items
+	end
 end

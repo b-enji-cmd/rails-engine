@@ -4,5 +4,4 @@ class Api::V1::Merchants::SearchController < ApplicationController
 	def show
 		json_response(MerchantSerializer.new(MerchantFacade.find_merchant(params[:id])))
 	end
-
 end
