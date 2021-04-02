@@ -9,6 +9,9 @@
 
 coverage/
 
+app/.DS_Store
+app/controllers/.DS_Store
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
