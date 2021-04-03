@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
 	include ActionController::Helpers
+	include ExceptionHandler
 	include Response
 	#set default results per page to 20 unless specified otherwise
 	def per_page
