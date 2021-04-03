@@ -12,10 +12,12 @@ RSpec.describe 'Merchants API', type: :request do
 			expect(json["data"].size).to eq(20)
 		end
 
+
 		it 'returns status code 200' do
 			expect(response).to have_http_status(200)
 		end
 	end
+
 
 	describe 'GET /api/v1/merchants?per_page=40' do
 		before {get '/api/v1/merchants?per_page=40'}
