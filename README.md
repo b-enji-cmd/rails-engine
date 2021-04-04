@@ -123,7 +123,6 @@ DELETE /api/v1/items/:id
 ### Update One Item
 ```
 PUT /api/v1/items/:id
-
 ```
 > Example request body, provides a 404 if supplied a bad merchant id
 ```
@@ -131,7 +130,7 @@ PUT /api/v1/items/:id
   "name": "new item name",
   "description": "new item description",
   "unit_price": <float>,
-  "merchant_id": <valid id integer>\
+  "merchant_id": <valid id integer>
 }
 ```
 
