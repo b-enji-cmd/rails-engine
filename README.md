@@ -84,11 +84,77 @@ rails s
 * Rails 5.2.5
 
 <!-- USAGE EXAMPLES -->
-## ReST Endpoints
 
+
+<details open>
+<summary>ReST Endpoints</summary>
+<br>
+  
 ### Get All Merchants
 
-  ```
-  GET /api/v1/merchants
-  ```
+```
+GET /api/v1/merchants
+```
+### Get All Items
+```
+GET /api/v1/items
+```
+### Get One Merchant
+```
+GET /api/v1/merchants/:id
+```
+### Get A Merchants Items
+```
+GET /api/v1/merchants/:id/items
+```
+### Get One Item
+```
+GET /api/v1/items/:id
+```
+### Create One Item
+```
+POST /api/v1/items
+```
+### Delete One Item
+```
+DELETE /api/v1/items/:id
+```
+> Will return 404 if specified item does not exist
+### Update One Item
+```
+PUT /api/v1/items/:id
+
+```
+> Example request body, provides a 404 if supplied a bad merchant id
+```
+{
+  "name": "new item name",
+  "description": "new item description",
+  "unit_price": <float>,
+  "merchant_id": <valid id integer>\
+}
+```
+
+### Get One Item's Merchant
+```
+GET /api/v1/items/:id/merchant
+```
+### 
+</details>
+
+<details open>
+<summary>Un-ReSTful</summary>
+<br>
+  
+### Find One Merchant by Name
+>Required parameters `name` 
+```
+GET /api/v1/merchants/find?name=x
+```
+### Find All Items by Name
+>Required parameters `name` 
+```
+GET /api/v1/items/find_all?name=x
+```
+</details>
 
