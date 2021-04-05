@@ -12,6 +12,7 @@ class ApplicationController < ActionController::API
 	end
 
 	def page_helper(serializer, class_arg)
+		#only page
 		if params[:page] && !params[:per_page]
 			json_response(serializer.new(class_arg.all.limit(20).offset(20 * (@page -1) )))
 		# only per_page
