@@ -38,6 +38,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'fast_jsonapi'
+  gem 'hirb'
 end
 
 group :development do
