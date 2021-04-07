@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
                         :credit_card_expiration_date,
                         :result
 
-  enum result: [:failed, :success]
+  #enum result: [:failed, :success]
 
   belongs_to :invoice
 end
