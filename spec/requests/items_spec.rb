@@ -138,21 +138,19 @@ describe 'GET /api/v1/items?per_page=40' do
 			  merchant_id: invalid_merchant
 			}
 		}
-		# before {post "/api/v1/items", params: invalid_attributes}
 
+before {put "/api/v1/items/#{items.first.id}", params: invalid_attributes}
 		it 'raises an exception' do
-			expect{
-				put "/api/v1/items", params: invalid_attributes
-			}.to raise_error(ActiveRecord::RecordNotFound)
+			expect(json["message"]).to eq "Validation failed: Merchant must exist"
 		end
 	end
 
 	describe 'GET /api/v1/items/find_all' do
-		before {get "/api/v1/items/find_all?name=#{items.first.name}"}
+		before {get "/api/v1/items/find_all?name=oven"}
 		it 'returns all items by name' do
 			expect(json).not_to be_empty
-			expect(json["data"]["id"].to_i).to eq(items.first.id)
-			expect(json["data"]["attributes"]["name"]).to eq(items.first.name)
+			expect(json["data"].first["type"]).to eq("item")
+			expect(json["data"].all? {|item| item["attributes"]["name"].downcase.include? "oven"  } ).to eq(true)
 		end
 
 		it 'returns status code 200' do

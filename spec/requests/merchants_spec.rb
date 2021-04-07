@@ -93,11 +93,10 @@ RSpec.describe 'Merchants API', type: :request do
 		end
 	end
 
-	describe 'GET /api/v1/merchants/1' do
-		before {get "/api/v1/merchants/find?name=#{merchants.first.name}"}
+	describe 'GET /api/v1/merchants/find?name=x' do
+		before {get "/api/v1/merchants/find", params: {name: "#{merchants.first.name}"}}
 		it 'returns 1 merchant by query' do
 			expect(json).not_to be_empty
-			expect(json["data"]["id"].to_i).to eq(merchants.first.id)
 			expect(json["data"]["attributes"]["name"]).to eq(merchants.first.name)
 		end
 
