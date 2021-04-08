@@ -9,20 +9,20 @@ class Api::V1::ItemsController < ApplicationController
 
 	def create
 		@item = Merchant.find(params[:merchant_id]).items.create(item_params)
-		render json: ItemSerializer.new(@item), status: :created if @item.save
+		json_response(ItemSerializer.new(@item), :created) if @item.save
 	end
 
 	def update
 		@item = Item.find(params[:id])
 		@item.update!(item_params)
-		render json: ItemSerializer.new(@item), status: 200
+		json_response(ItemSerializer.new(@item))
 	end
 
 	def destroy
 		Item.find(params[:id]).destroy
 	end
 
-	private
+	# private
 
 
 	def item_params
