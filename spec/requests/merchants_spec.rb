@@ -105,4 +105,17 @@ RSpec.describe 'Merchants API', type: :request do
 		end
 	end
 
+	describe 'GET /api/v1/merchants/find?name=x' do
+		before {get "/api/v1/merchants/find?name=NOMATH"}
+		it 'returns 1 merchant by query' do
+			expect(json["data"].class).to eq Hash
+			expect(json["data"].keys.empty?).to eq true
+
+		end
+
+		it 'returns status code 200' do
+			expect(response).to have_http_status(200)
+		end
+	end
+
 end

@@ -120,10 +120,12 @@ describe 'GET /api/v1/items?per_page=40' do
 			  merchant_id: valid_merchant
 			}
 		}
-		before {post "/api/v1/items", params: valid_attributes}
+		before {put "/api/v1/items/#{items.first.id}", params: valid_attributes}
 
 		it 'returns status code 200' do
-			expect(response).to have_http_status(201)
+			expect(json["data"]["type"]).to eq "item"
+			expect(json["data"]["attributes"].values).to eq valid_attributes.values
+			expect(response).to have_http_status(200)
 		end
 	end
 
@@ -158,12 +160,35 @@ before {put "/api/v1/items/#{items.first.id}", params: invalid_attributes}
 		end
 	end
 
+	describe 'GET /api/v1/items/find_all' do
+		before {get "/api/v1/items/find_all?name=NOMATCH"}
+		it 'returns no matches' do
+			expect(json["data"]).to be_empty
+		end
+
+		it 'returns status code 200' do
+			expect(response).to have_http_status(200)
+		end
+	end
+
 	describe 'GET /api/v1/items/find_all?min_price=30' do
 		let(:min) {30}
 		before {get "/api/v1/items/find_all?min_price=#{min}"}
 		it 'returns all items by min_price' do
 			expect(json).not_to be_empty
 			expect(json["data"].all? {|item|item["attributes"]["unit_price"]> min }).to eq(true)
+		end
+
+		it 'returns status code 200' do
+			expect(response).to have_http_status(200)
+		end
+	end
+
+	describe 'GET /api/v1/items/find_all?min_price=30' do
+		let(:min) {9000}
+		before {get "/api/v1/items/find_all?min_price=#{min}"}
+		it 'returns all items by min_price' do
+			expect(json["data"]).to be_empty
 		end
 
 		it 'returns status code 200' do
@@ -195,6 +220,52 @@ before {put "/api/v1/items/#{items.first.id}", params: invalid_attributes}
 
 		it 'returns status code 200' do
 			expect(response).to have_http_status(200)
+		end
+	end
+
+	describe 'GET /api/v1/items/find?max_price=' do
+		let(:max) {400}
+		let(:min) {150}
+		before {get "/api/v1/items/find?max_price=#{max}&min_price=#{min}"}
+		it 'returns all items by min_price and max_price' do
+			expect(json).not_to be_empty
+			expect(json["data"].class).to eq Hash
+			expect(json["data"]["attributes"]["unit_price"] > min).to eq true
+			expect(json["data"]["attributes"]["unit_price"] < max).to eq true
+		end
+
+		it 'returns status code 200' do
+			expect(response).to have_http_status(200)
+		end
+	end
+
+	describe 'GET /api/v1/items/find' do
+		let(:max) {400}
+		let(:min) {150}
+		before {get "/api/v1/items/find?name=blah&max_price=#{max}&min_price=#{min}"}
+		it "returns a 404" do
+			expect(json["data"].empty?).to eq true
+			expect(json["error"].present?).to eq true
+		end
+	end
+
+	describe 'GET /api/v1/items/find' do
+		let(:max) {400}
+		let(:min) {150}
+		before {get "/api/v1/items/find?name=blah&min_price=#{min}"}
+		it "returns a 404" do
+			expect(json["data"].empty?).to eq true
+			expect(json["error"].present?).to eq true
+		end
+	end
+
+	describe 'GET /api/v1/items/find' do
+		let(:max) {400}
+		let(:min) {150}
+		before {get "/api/v1/items/find?name=blah&max_price=#{max}"}
+		it "returns a 404" do
+			expect(json["data"].empty?).to eq true
+			expect(json["error"].present?).to eq true
 		end
 	end
 
