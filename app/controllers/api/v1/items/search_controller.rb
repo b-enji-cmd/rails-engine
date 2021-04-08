@@ -9,28 +9,23 @@ class Api::V1::Items::SearchController < ApplicationController
 
 		if !params[:name].nil?
 			matching_items = Item.order(name: :asc).where("name ILIKE ? or description LIKE ?", "%#{params[:name]}%","%#{params[:name]}%")
-			if matching_items.nil?
-				render json: {data: []}
-			else
-				render json: ItemSerializer.new(matching_items)
-			# json_response(ItemSerializer.new(matching_items))
-			end
+			json_response(ItemSerializer.new(matching_items))
 		else
-			render json: {data: []}
+			json_response({data: []})
 		end
 	end
 
+	def find
+   if item_search_helper
+    item_object_search_helper
+    json_response(ItemSerializer.new(@item.first!))
+   else
+   	json_response({data: {}, error: 'error'}, 400)
+   end
+	end
 
 	private
-
-	# def price_query
-	# 	# injects ar based on which params are present
-	# 	if params["min_price"] && !params["max_price"]
-	# 		Item.where(["unit_price > ?","#{params["min_price"].to_i}"])
-	# 	elsif !params["min_price"] && params["max_price"]
-	# 		Item.where(["unit_price < ?","#{params["max_price"].to_i}"])
-	# 	elsif params["min_price"] && params["max_price"]
-	# 		Item.where(["unit_price < ? and unit_price > ? ","#{params["max_price"].to_i}", "#{params["min_price"].to_i}"])
-	# 	end
-	# end
+ def item_params(params)
+   params.permit(:name, :min_price, :max_price)
+ end
 end

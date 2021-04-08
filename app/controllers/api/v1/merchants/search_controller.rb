@@ -6,9 +6,9 @@ class Api::V1::Merchants::SearchController < ApplicationController
 	end
 
 	def find
-		matching_merchant = Merchant.order(name: :asc).find_by("name LIKE ?", "%#{params[:name].downcase}%")
+		matching_merchant = Merchant.order(name: :asc).find_by("name iLIKE ?", "%#{params[:name]}%")
 		if matching_merchant.nil?
-			render json: {data: {}}
+			json_response({data: {}})
 		else
 			json_response(MerchantSerializer.new(matching_merchant))
 		end

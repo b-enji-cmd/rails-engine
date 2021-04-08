@@ -27,5 +27,21 @@ class ApplicationController < ActionController::API
 		end
 	end
 
+	def item_search_helper
+	   params[:max_price] && params[:max_price].to_i > 0 && !params[:name] ? true : false
+	   params[:name] && !params[:min_price] && !params[:max_price] ? true : false
+	   params[:min_price] && params[:max_price] && !params[:name] ? true : false
+	   params[:min_price] && params[:min_price].to_i > 0 && !params[:name] ? true : false
+	 end
+
+	 def item_object_search_helper
+	   @item = Item.where(nil)
+	    if item_search_helper
+	      item_params(params).each do |key, value|
+	          @item = @item.public_send("find_by_#{key}", value)
+	      end
+	    end
+	end
+
 	helper_method :per_page, :page_num
 end
