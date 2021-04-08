@@ -155,5 +155,25 @@ GET /api/v1/merchants/find?name=x
 ```
 GET /api/v1/items/find_all?name=x
 ```
+### List Merchants by Items Sold
+>Required parameters `quantity`. Non negative
+```
+GET /api/v1/merchants/most_items?quantity=X
+```
+### List Merchants by Revenue
+>Required parameters `quantity`. Non negative
+```
+GET /api/v1/revenue/merchants?quantity=x
+```
+### Find Revenue of a Single Merchant
+>Required parameters `id`
+```
+GET /api/v1/revenue/merchants/:id
+```
+### Weekly Revenue Report 
+```
+GET /api/v1/revenue/weekly
+```
+
 </details>
 
