@@ -1,20 +1,4 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
 
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 
 <!-- TABLE OF CONTENTS -->
@@ -53,6 +37,11 @@ Areas of exploration and learning on this project included:
 * Compose advanced ActiveRecord queries to analyze information stored in SQL databases ⭐ ⭐
 * Write basic SQL statements without the assistance of an ORM ⭐
 
+<!-- REFLECTIONS -->
+## Reflections
+Looking back on this project after some time has passed, I was really proud of what I accomplished here. The circumstances around the initial assignment was a little chaotic. Before this project, our cohort had been building projects in regular Ruby on Rails apps. As we were being assigned this project, we were essentially told to research the Rails API framework and "figure it out" which in hindsight was what stirred the fire in my belly. Over the next day, I managed to get comfortable with the framework and build the initial structure in a matter of hours. 
+
+A major highlight was experimenting with Exception Handling. I had always wanted to implement a system that could raise and handle exceptions that I created and this environment seemed like the perfect opportunity! Investigating how Rails manages and structures exceptions was fascinating and I wanted to throw them everywhere I could. I learned very quickly, that line of thinking is definitely dangerous and should only be used when critically needed. 
 
 ### Built With
 
